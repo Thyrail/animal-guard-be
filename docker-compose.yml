@@ -1,0 +1,37 @@
+services:
+  app:
+    build: .
+    image: thyrail/animal-guard-be:latest 
+    platform: linux/arm64
+    container_name: animal-guard-api
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.animal-guard.rule=Host(`${API_DOMAIN}`)"
+      - "traefik.http.routers.animal-guard.entrypoints=websecure"
+      - "traefik.http.routers.animal-guard.tls.certresolver=le"
+      - "traefik.http.services.animal-guard.loadbalancer.server.port=3000"
+    networks:
+      - proxy
+
+  mongo:
+    image: mongo
+    container_name: animal-guard-db
+    restart: always
+    ports:
+      - "27020:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  mongo-data:

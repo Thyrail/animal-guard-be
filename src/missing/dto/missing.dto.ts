@@ -11,6 +11,15 @@ export class CreateMissingDto
     @ApiProperty({ example: ['https://example.com/missing-dog.jpg'], description: 'Array of image URLs', isArray: true })
     images: string[];
 
+    @ApiProperty({ example: 'Golden Retriever', required: false, description: 'Breed of the missing animal' })
+    breed?: string;
+
+    @ApiProperty({ example: 'Brown', required: false, description: 'Colour of the missing animal' })
+    colour?: string;
+
+    @ApiProperty({ example: true, required: false, description: 'Is the animal chipped?' })
+    chipped?: boolean;
+
 }
 
 export class UpdateMissingDto
@@ -23,5 +32,14 @@ export class UpdateMissingDto
 
     @ApiProperty({ example: ['https://example.com/missing-dog-updated.jpg'], required: false, isArray: true })
     images?: string[];
+
+    @ApiProperty({ example: 'Labrador Retriever', required: false })
+    breed?: string;
+
+    @ApiProperty({ example: 'Black', required: false })
+    colour?: string;
+
+    @ApiProperty({ example: true, required: false })
+    chipped?: boolean;
 
 }

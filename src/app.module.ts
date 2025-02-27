@@ -6,6 +6,7 @@ import { EventModule } from './event/event.module';
 import { MissingModule } from './missing/missing.module';
 import { NewsModule } from './news/news.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UserModule } from './user/user.module';
     MissingModule,
     NewsModule,
     UserModule,
+    AuthModule,
   ],
 })
 

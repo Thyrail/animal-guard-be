@@ -44,6 +44,9 @@ export class CreateUserDto
     @ApiProperty({ example: 'SecurePassword123!', description: 'Password of the user' })
     password: string;
 
+    @ApiProperty({ example: true, required: false, description: 'Is the user an admin?' })
+    isAdmin?: boolean;
+
 }
 
 export class UpdateUserDto
@@ -85,5 +88,11 @@ export class UpdateUserDto
 
     @ApiProperty({ example: '+49111111111', required: false })
     phone?: string;
+
+    @ApiProperty({ example: 'NewPassword123!', required: false })
+    password?: string;
+
+    @ApiProperty({ example: true, required: false })
+    isAdmin?: boolean;
 
 }

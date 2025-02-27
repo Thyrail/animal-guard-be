@@ -33,5 +33,5 @@ export class AdoptionService
     {
         return this.model.findByIdAndDelete(id).exec();
     }
-    
+
 }

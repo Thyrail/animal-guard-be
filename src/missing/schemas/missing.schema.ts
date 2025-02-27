@@ -12,6 +12,17 @@ export class MissingPost extends Document
 
     @Prop([String])
     images: string[];
+
+    @Prop()
+    breed?: string;
+
+    @Prop()
+    colour?: string;
+
+    @Prop()
+    chipped?: boolean;
+
+
 }
 
 export const MissingPostSchema = SchemaFactory.createForClass(MissingPost);

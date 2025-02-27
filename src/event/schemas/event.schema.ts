@@ -10,8 +10,8 @@ export class Event extends Document
     @Prop({ required: true })
     description: string;
 
-    @Prop()
-    picture?: string;
+    @Prop([String])
+    picture?: string[];
 
     @Prop({ required: true })
     time: string;
@@ -24,6 +24,7 @@ export class Event extends Document
 
     @Prop({ required: true })
     postalCode: string;
+    
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);

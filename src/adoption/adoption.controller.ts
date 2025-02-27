@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common'
 import { AdoptionService } from './adoption.service';
 import { CreateAdoptionDto, UpdateAdoptionDto } from './dto/adoption.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { RouterModule } from '@nestjs/core';
 
 @ApiTags('Adoption')
 @Controller('adoption')

@@ -48,4 +48,9 @@ export class UserService
         return user;
     }
 
+    async findByEmail(email: string)
+    {
+        return this.model.findOne({ email }).exec();
+    }
+
 }

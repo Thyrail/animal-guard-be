@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
-import { AdoptionModule } from './adoption/adoption.module';
-import { EventModule } from './event/event.module';
-import { MissingModule } from './missing/missing.module';
-import { NewsModule } from './news/news.module';
-import { UserModule } from './user/user.module';
+import { AdoptionModule } from './api/adoption/adoption.module';
+import { EventModule } from './api/event/event.module';
+import { MissingModule } from './api/missing/missing.module';
+import { NewsModule } from './api/news/news.module';
+import { UserModule } from './api/user/user.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({

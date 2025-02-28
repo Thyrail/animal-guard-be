@@ -1,11 +1,12 @@
 import { Injectable, NestMiddleware, UnauthorizedException } from '@nestjs/common';
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
+import { AuthenticatedRequest } from '../models/interfaces/auth-request.interface';
 import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware
 {
-    use(req: Request, res: Response, next: NextFunction)
+    use(req: AuthenticatedRequest, res: Response, next: NextFunction)
     {
         const token = req.headers.authorization?.split(' ')[1];
 
@@ -16,7 +17,7 @@ export class AuthMiddleware implements NestMiddleware
 
         try
         {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            const decoded = jwt.verify(token, process.env.JWT_SECRET) as { userId: string; isAdmin: boolean };
             req.user = decoded;
             next();
         } catch (error)
@@ -24,4 +25,5 @@ export class AuthMiddleware implements NestMiddleware
             throw new UnauthorizedException('Ungültiges Token');
         }
     }
+
 }

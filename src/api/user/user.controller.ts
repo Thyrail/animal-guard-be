@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Body, Param, Req, UseGuards } from 
 import { UserService } from './user.service';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '../middleware/auth.guard';
+import { AuthGuard } from '../../guards/auth.guard';
 
 @ApiTags('Users')
 @Controller('users')

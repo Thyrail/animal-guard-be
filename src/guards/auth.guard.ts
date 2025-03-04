@@ -13,28 +13,34 @@ export class AuthGuard implements CanActivate
         const request = context.switchToHttp().getRequest<AuthenticatedRequest>();
         const authHeader = request.headers.authorization;
 
-        if (!authHeader)
+        if (!authHeader || !authHeader.startsWith('Bearer '))
         {
-            throw new UnauthorizedException('Kein Token vorhanden');
+            throw new UnauthorizedException('Kein gültiges Token im Header gefunden');
         }
 
         const token = authHeader.split(' ')[1];
         try
         {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET) as { userId: string };
+            const decoded = jwt.verify(token, process.env.JWT_SECRET) as { userId: string, isAdmin: boolean };
             const user = await this.userService.findOne(decoded.userId);
 
             if (!user)
             {
-                throw new UnauthorizedException('Benutzer nicht gefunden');
+                throw new UnauthorizedException('Benutzer existiert nicht oder wurde gelöscht');
             }
 
-            request.user = { userId: user._id.toString(), isAdmin: user.isAdmin };
+            // **JWT Benutzer in den Request setzen**
+            request.user = {
+                userId: user._id.toString(),
+                isAdmin: user.isAdmin
+            };
+
             return true;
         } catch (error)
         {
-            throw new UnauthorizedException('Ungültiges Token');
+            console.error('JWT Verification Error:', error.message);
+            throw new UnauthorizedException('Ungültiges Token oder abgelaufen');
         }
     }
-
+    
 }

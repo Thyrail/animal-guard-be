@@ -1,10 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import moment from 'moment-timezone';
 
-enum Gender {
+enum Gender
+{
     Male = 'male',
     Female = 'female',
-    Unknown = 'unknown'
 }
 
 @Schema({ timestamps: true })
@@ -13,7 +14,7 @@ export class AdoptionPost extends Document
     @Prop({ required: true })
     title: string;
 
-    @Prop({ required: true })
+    @Prop({ type: String, required: true })
     description: string;
 
     @Prop([String])
@@ -22,8 +23,13 @@ export class AdoptionPost extends Document
     @Prop()
     estimatedAge?: string;
 
-    @Prop()
+    @Prop({ type: Date, default: Date.now })
     birthDate?: Date;
+
+    get formattedBirthDate(): string
+    {
+        return this.birthDate ? moment(this.birthDate).tz("Europe/Berlin").format('DD.MM.YYYY') : null;
+    }
 
     @Prop()
     breed?: string;
@@ -31,11 +37,14 @@ export class AdoptionPost extends Document
     @Prop()
     colour?: string;
 
-    @Prop({ type: String, enum: Gender, default: Gender.Unknown })
-    gender?: Gender;
+    @Prop()
+    weight?: string;
 
-    @Prop({ type: [String] })
-    specialFeatures?: string[]; //* Besondere Merkmale (z.B. Behinderung, Narben, besonderes Verhalten etc...)
+    @Prop({ type: String, enum: Gender, required: true })
+    gender: Gender;
+
+    @Prop({ type: Map, of: String })
+    specialFeatures?: Record<string, string>; //* Besondere Merkmale (z.B. Behinderung, Narben, besonderes Verhalten etc...)
 
     @Prop({ default: false })
     vaccinated?: boolean;

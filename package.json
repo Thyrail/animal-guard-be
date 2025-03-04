@@ -29,6 +29,7 @@
     "bcryptjs": "^3.0.2",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
+    "moment-timezone": "^0.5.47",
     "mongoose": "^8.10.2",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"

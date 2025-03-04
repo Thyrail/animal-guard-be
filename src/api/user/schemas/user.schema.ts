@@ -14,7 +14,7 @@ export class User extends Document
     title?: string;
 
     @Prop({ enum: ['Herr', 'Frau'], default: null })
-    salutation?: string;
+    salutation?: string | null;
 
     @Prop()
     birthPlace?: string;

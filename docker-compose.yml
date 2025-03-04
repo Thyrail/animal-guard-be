@@ -9,6 +9,8 @@ services:
       - .env
     depends_on:
       - mongo
+    environment:
+      - TZ=${TZ}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.animal-guard.rule=Host(`${API_DOMAIN}`)"
@@ -22,6 +24,8 @@ services:
     image: mongo
     container_name: animal-guard-db
     restart: always
+    environment:
+      - TZ=${TZ}
     ports:
       - "27020:27017"
     volumes:

@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+enum Gender
+{
+    Male = 'male',
+    Female = 'female'
+}
+
 export class CreateAdoptionDto
 {
     @ApiProperty({ example: 'Cute Puppy for Adoption', description: 'Title of the adoption post' })
@@ -23,11 +29,15 @@ export class CreateAdoptionDto
     @ApiProperty({ example: 'Brown', required: false, description: 'Colour of the animal' })
     colour?: string;
 
-    @ApiProperty({ example: 'male', required: false, description: 'Gender of the animal' })
-    gender?: string;
+    @ApiProperty({ example: 'male', enum: ['male', 'female'], required: false })
+    gender?: Gender;
 
-    @ApiProperty({ example: ['Special feature 1', 'Special feature 2'], required: false, isArray: true })
-    specialFeatures?: string[];
+    @ApiProperty({
+        example: { "Verträglichkeit mit Hunden": "Ja", "Behinderungen": "Blind" },
+        required: false,
+        description: 'Structured special features'
+    })
+    specialFeatures?: Record<string, string>;
 
     @ApiProperty({ example: true, required: false, description: 'Is the animal vaccinated?' })
     vaccinated?: boolean;
@@ -63,11 +73,14 @@ export class UpdateAdoptionDto
     @ApiProperty({ example: 'Black', required: false })
     colour?: string;
 
-    @ApiProperty({ example: 'Male', required: false, description: 'Gender of the animal' })
-    gender?: string;
+    @ApiProperty({ example: 'male', enum: ['male', 'female'], required: true })
+    gender: Gender;
 
-    @ApiProperty({ example: ['Special feature 3', 'Special feature 4'], required: false, isArray: true })
-    specialFeatures?: string[];
+    @ApiProperty({
+        example: { "Verträglichkeit mit Katzen": "Nein", "Besondere Fähigkeiten": "Therapiehund" },
+        required: false
+    })
+    specialFeatures?: Record<string, string>;
 
     @ApiProperty({ example: true, required: false, description: 'Is the animal vaccinated?' })
     vaccinated?: boolean;

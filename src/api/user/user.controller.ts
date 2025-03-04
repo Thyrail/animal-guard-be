@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Req, UseGuards, UnauthorizedException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -20,13 +20,14 @@ export class UserController
     @Get()
     findAll(@Req() req)
     {
+        console.log("Headers: ", req.headers);
+        console.log("Decoded User: ", req.user);
         if (!req.user || !req.user.isAdmin)
         {
-            return { message: 'Nur Admins dürfen diese Aktion ausführen' };
+            throw new UnauthorizedException('Nur Admins dürfen diese Aktion ausführen');
         }
         return this.userService.findAll();
     }
-
     @UseGuards(AuthGuard)
     @Get(':id')
     findOne(@Param('id') id: string, @Req() req)
@@ -59,5 +60,5 @@ export class UserController
         }
         return this.userService.remove(id);
     }
-    
+
 }

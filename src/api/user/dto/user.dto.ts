@@ -60,8 +60,8 @@ export class UpdateUserDto
     @ApiProperty({ example: 'Dr.', required: false })
     title?: string;
 
-    @ApiProperty({ example: 'Herr', enum: ['Herr', 'Frau'], required: false })
-    salutation?: 'Herr' | 'Frau';
+    @ApiProperty({ example: 'Herr', enum: ['Herr', 'Frau'], required: false, description: 'Salutation of the user' })
+    salutation?: 'Herr' | 'Frau' | null;
 
     @ApiProperty({ example: 'Berlin', required: false })
     birthPlace?: string;

@@ -22,7 +22,6 @@ export class MissingPost extends Document
     @Prop()
     chipped?: boolean;
 
-
 }
 
 export const MissingPostSchema = SchemaFactory.createForClass(MissingPost);

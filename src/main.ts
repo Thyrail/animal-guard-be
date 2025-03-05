@@ -20,7 +20,7 @@ async function bootstrap()
     .setTitle('Animal Guard API')
     .setDescription('API documentation for Animal Guard')
     .setVersion('1.0')
-    .addBearerAuth()
+    // .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

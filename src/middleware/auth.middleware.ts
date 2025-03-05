@@ -8,22 +8,31 @@ export class AuthMiddleware implements NestMiddleware
 {
     use(req: AuthenticatedRequest, res: Response, next: NextFunction)
     {
-        const token = req.headers.authorization?.split(' ')[1];
+        const authHeader = req.headers.authorization;
 
-        if (!token)
+        if (!authHeader || !authHeader.startsWith('Bearer '))
         {
-            throw new UnauthorizedException('Kein Token vorhanden');
+            console.log("🚨 Kein Token im Header!");
+            return next();
         }
+
+        const token = authHeader.split(' ')[1];
 
         try
         {
             const decoded = jwt.verify(token, process.env.JWT_SECRET) as { userId: string; isAdmin: boolean };
-            req.user = decoded;
-            next();
+            req.user = {
+                userId: decoded.userId,
+                isAdmin: decoded.isAdmin
+            };
+
+            console.log("✅ Middleware Authenticated User:", req.user);
         } catch (error)
         {
-            throw new UnauthorizedException('Ungültiges Token');
+            console.error("🚨 JWT Verification Error in Middleware:", error.message);
         }
+
+        next();
     }
 
 }

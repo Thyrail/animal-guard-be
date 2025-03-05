@@ -2,11 +2,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import moment from 'moment-timezone';
 
-enum Gender
-{
-    Male = 'male',
-    Female = 'female',
-}
 
 @Schema({ timestamps: true })
 export class AdoptionPost extends Document
@@ -40,8 +35,8 @@ export class AdoptionPost extends Document
     @Prop()
     weight?: string;
 
-    @Prop({ type: String, enum: Gender, required: true })
-    gender: Gender;
+    @Prop({ type: String, required: false })
+    gender: string;
 
     @Prop({ type: Map, of: String })
     specialFeatures?: Record<string, string>; //* Besondere Merkmale (z.B. Behinderung, Narben, besonderes Verhalten etc...)

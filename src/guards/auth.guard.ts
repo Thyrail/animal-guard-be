@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate
 
         if (!authHeader || !authHeader.startsWith('Bearer '))
         {
+            console.log("🚨 Kein gültiges Token im Header gefunden!");
             throw new UnauthorizedException('Kein gültiges Token im Header gefunden');
         }
 
@@ -26,6 +27,7 @@ export class AuthGuard implements CanActivate
 
             if (!user)
             {
+                console.log("🚨 Benutzer existiert nicht oder wurde gelöscht!");
                 throw new UnauthorizedException('Benutzer existiert nicht oder wurde gelöscht');
             }
 
@@ -35,10 +37,11 @@ export class AuthGuard implements CanActivate
                 isAdmin: user.isAdmin
             };
 
+            console.log("✅ Authenticated User:", request.user);
             return true;
         } catch (error)
         {
-            console.error('JWT Verification Error:', error.message);
+            console.error('🚨 JWT Verification Error:', error.message);
             throw new UnauthorizedException('Ungültiges Token oder abgelaufen');
         }
     }

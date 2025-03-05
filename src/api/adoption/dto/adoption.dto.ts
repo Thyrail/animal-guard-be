@@ -1,10 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-enum Gender
-{
-    Male = 'male',
-    Female = 'female'
-}
 
 export class CreateAdoptionDto
 {
@@ -29,8 +24,8 @@ export class CreateAdoptionDto
     @ApiProperty({ example: 'Brown', required: false, description: 'Colour of the animal' })
     colour?: string;
 
-    @ApiProperty({ example: 'male', enum: ['male', 'female'], required: false })
-    gender?: Gender;
+    @ApiProperty({ example: 'male', required: false })
+    gender?: string;
 
     @ApiProperty({
         example: { "Verträglichkeit mit Hunden": "Ja", "Behinderungen": "Blind" },
@@ -73,8 +68,8 @@ export class UpdateAdoptionDto
     @ApiProperty({ example: 'Black', required: false })
     colour?: string;
 
-    @ApiProperty({ example: 'male', enum: ['male', 'female'], required: true })
-    gender: Gender;
+    @ApiProperty({ example: 'male', required: false })
+    gender?: string;
 
     @ApiProperty({
         example: { "Verträglichkeit mit Katzen": "Nein", "Besondere Fähigkeiten": "Therapiehund" },

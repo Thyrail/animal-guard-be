@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Body, Param, Req, UseGuards, Unauth
 import { UserService } from './user.service';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '../../guards/auth.guard';
+// import { AuthGuard } from '../../guards/auth.guard';
 
 @ApiTags('Users')
 @Controller('users')
@@ -16,48 +16,39 @@ export class UserController
         return this.userService.create(dto);
     }
 
-    @UseGuards(AuthGuard)
+    // @UseGuards(AuthGuard)
     @Get()
     findAll(@Req() req)
     {
-        console.log("Headers: ", req.headers);
-        console.log("Decoded User: ", req.user);
-        if (!req.user || !req.user.isAdmin)
-        {
-            throw new UnauthorizedException('Nur Admins dürfen diese Aktion ausführen');
-        }
+        // console.log("✅ Authenticated User:", req.user);
+        // if (!req.user || !req.user.isAdmin)
+        // {
+        //     throw new UnauthorizedException('Nur Admins dürfen diese Aktion ausführen');
+        // }
         return this.userService.findAll();
     }
-    @UseGuards(AuthGuard)
+
+    // @UseGuards(AuthGuard)
     @Get(':id')
     findOne(@Param('id') id: string, @Req() req)
     {
-        if (!req.user || !req.user.isAdmin)
-        {
-            return { message: 'Nur Admins dürfen diese Aktion ausführen' };
-        }
+        // console.log("✅ Authenticated User:", req.user);
         return this.userService.findOne(id);
     }
 
-    @UseGuards(AuthGuard)
+    // @UseGuards(AuthGuard)
     @Put(':id')
     update(@Param('id') id: string, @Body() dto: UpdateUserDto, @Req() req)
     {
-        if (!req.user || !req.user.isAdmin)
-        {
-            return { message: 'Nur Admins dürfen diese Aktion ausführen' };
-        }
+        // console.log("✅ Authenticated User:", req.user);
         return this.userService.update(id, dto);
     }
 
-    @UseGuards(AuthGuard)
+    // @UseGuards(AuthGuard)
     @Delete(':id')
     remove(@Param('id') id: string, @Req() req)
     {
-        if (!req.user || !req.user.isAdmin)
-        {
-            return { message: 'Nur Admins dürfen diese Aktion ausführen' };
-        }
+        // console.log("✅ Authenticated User:", req.user);
         return this.userService.remove(id);
     }
 

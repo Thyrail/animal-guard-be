@@ -11,8 +11,8 @@ export class CreateUserDto
     @ApiProperty({ example: 'Dr.', required: false, description: 'Title of the user' })
     title?: string;
 
-    @ApiProperty({ example: 'Herr', enum: ['Herr', 'Frau'], required: false, description: 'Salutation of the user' })
-    salutation?: 'Herr' | 'Frau';
+    @ApiProperty({ example: 'Herr', required: false, description: 'Salutation of the user' })
+    salutation?: string;
 
     @ApiProperty({ example: 'Berlin', required: false, description: 'Birthplace of the user' })
     birthPlace?: string;
@@ -60,8 +60,8 @@ export class UpdateUserDto
     @ApiProperty({ example: 'Dr.', required: false })
     title?: string;
 
-    @ApiProperty({ example: 'Herr', enum: ['Herr', 'Frau'], required: false, description: 'Salutation of the user' })
-    salutation?: 'Herr' | 'Frau' | null;
+    @ApiProperty({ example: 'Herr', required: false, description: 'Salutation of the user' })
+    salutation?: string;
 
     @ApiProperty({ example: 'Berlin', required: false })
     birthPlace?: string;

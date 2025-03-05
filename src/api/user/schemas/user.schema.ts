@@ -13,8 +13,8 @@ export class User extends Document
     @Prop()
     title?: string;
 
-    @Prop({ enum: ['Herr', 'Frau'], default: null })
-    salutation?: string | null;
+    @Prop()
+    salutation?: string;
 
     @Prop()
     birthPlace?: string;

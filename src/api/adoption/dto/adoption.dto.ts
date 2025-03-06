@@ -9,8 +9,11 @@ export class CreateAdoptionDto
     @ApiProperty({ example: 'A friendly dog looking for a home', description: 'Description of the adoption post' })
     description: string;
 
-    @ApiProperty({ example: ['https://example.com/dog1.jpg'], description: 'Array of image URLs', isArray: true })
-    images: string[];
+    @ApiProperty({ example: ['https://example.com/dog2.jpg'], required: false, isArray: true })
+    images?: string[];
+
+    @ApiProperty({ example: ['https://example.com/dog2.jpg'], required: false, isArray: true })
+    imageUrls?: string[];
 
     @ApiProperty({ example: '2021-01-01', required: false, description: 'Estimated age of the animal' })
     estimatedAge?: string;
@@ -55,6 +58,9 @@ export class UpdateAdoptionDto
 
     @ApiProperty({ example: ['https://example.com/dog2.jpg'], required: false, isArray: true })
     images?: string[];
+
+    @ApiProperty({ example: ['https://example.com/dog2.jpg'], required: false, isArray: true })
+    imageUrls?: string[];
 
     @ApiProperty({ example: '2021-01-02', required: false })
     estimatedAge?: string;

@@ -12,8 +12,12 @@ export class AdoptionPost extends Document
     @Prop({ type: String, required: true })
     description: string;
 
-    @Prop([String])
+    //? Multer muss hinzugefügt werden um Images von lokal auf den Server hochzuladen
+    @Prop({ type: [String]})
     images: string[];
+
+    @Prop({ type: [String]})
+    imageUrls: string[];
 
     @Prop()
     estimatedAge?: string;

@@ -2,14 +2,17 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateEventDto
 {
-    @ApiProperty({ example: 'Charity Run', description: 'Title of the event' })
+    @ApiProperty({ example: 'Charity Run', required: true, description: 'Title of the event' })
     title: string;
 
-    @ApiProperty({ example: 'A 5km charity run for a cause', description: 'Event description' })
+    @ApiProperty({ example: 'A 5km charity run for a cause', required: true, description: 'Event description' })
     description: string;
 
-    @ApiProperty({ example: 'https://example.com/event.jpg', description: 'Event image URL', required: false })
-    picture?: string;
+    @ApiProperty({ example: 'https://example.com/event.jpg', required: false, description: 'Event image URL'})
+    images?: [string];
+
+    @ApiProperty({ example: 'https://example.com/event.jpg', required: false, description: 'Event image URL' })
+    imageUrls?: [string];
 
     @ApiProperty({ example: '14:00', description: 'Time of the event' })
     time: string;
@@ -33,8 +36,11 @@ export class UpdateEventDto
     @ApiProperty({ example: 'Updated description', required: false })
     description?: string;
 
-    @ApiProperty({ example: 'https://example.com/event2.jpg', required: false })
-    picture?: string;
+    @ApiProperty({ example: 'https://example.com/event.jpg', required: false, description: 'Event image URL'})
+    images?: string[];
+
+    @ApiProperty({ example: 'https://example.com/event.jpg', required: false, description: 'Event image URL' })
+    imageUrls?: string[];
 
     @ApiProperty({ example: '15:00', required: false })
     time?: string;

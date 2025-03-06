@@ -2,14 +2,17 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateMissingDto
 {
-    @ApiProperty({ example: 'Lost Dog', description: 'Title of the missing post' })
+    @ApiProperty({ example: 'Lost Dog', required: true, description: 'Title of the missing post' })
     title: string;
 
-    @ApiProperty({ example: 'A small brown dog was lost near the park.', description: 'Details about the missing case' })
+    @ApiProperty({ example: 'A small brown dog was lost near the park.', required: true, description: 'Details about the missing case' })
     description: string;
 
-    @ApiProperty({ example: ['https://example.com/missing-dog.jpg'], description: 'Array of image URLs', isArray: true })
+    @ApiProperty({ example: ['https://example.com/missing-dog.jpg'], required: false, description: 'Array of image URLs', isArray: true })
     images: string[];
+
+    @ApiProperty({ example: ['https://example.com/missing-dog.jpg'], required: false, description: 'Array of image URLs', isArray: true })
+    imageUrls: string[];
 
     @ApiProperty({ example: 'Golden Retriever', required: false, description: 'Breed of the missing animal' })
     breed?: string;
@@ -30,8 +33,11 @@ export class UpdateMissingDto
     @ApiProperty({ example: 'Updated description', required: false })
     description?: string;
 
-    @ApiProperty({ example: ['https://example.com/missing-dog-updated.jpg'], required: false, isArray: true })
-    images?: string[];
+    @ApiProperty({ example: ['https://example.com/missing-dog.jpg'], required: false, description: 'Array of image URLs', isArray: true })
+    images: string[];
+
+    @ApiProperty({ example: ['https://example.com/missing-dog.jpg'], required: false, description: 'Array of image URLs', isArray: true })
+    imageUrls: string[];
 
     @ApiProperty({ example: 'Labrador Retriever', required: false })
     breed?: string;

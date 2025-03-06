@@ -10,19 +10,22 @@ export class Event extends Document
     @Prop({ required: true })
     description: string;
 
-    @Prop([String])
-    picture?: string[];
+    @Prop({ type: [String]})
+    images: string[];
 
-    @Prop({ required: true })
+    @Prop({ type: [String]})
+    imageUrls: string[];
+
+    @Prop()
     time: string;
 
-    @Prop({ required: true })
+    @Prop()
     date: Date;
 
-    @Prop({ required: true })
+    @Prop()
     location: string;
 
-    @Prop({ required: true })
+    @Prop()
     postalCode: string;
     
 }

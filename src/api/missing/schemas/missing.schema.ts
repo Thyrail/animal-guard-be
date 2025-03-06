@@ -10,8 +10,11 @@ export class MissingPost extends Document
     @Prop({ required: true })
     description: string;
 
-    @Prop([String])
+    @Prop({ type: [String] })
     images: string[];
+
+    @Prop({ type: [String] })
+    imageUrls: string[];
 
     @Prop()
     breed?: string;

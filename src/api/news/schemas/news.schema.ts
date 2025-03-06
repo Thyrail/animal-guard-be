@@ -10,8 +10,19 @@ export class News extends Document
     @Prop({ required: true })
     description: string;
 
-    @Prop()
-    picture?: string;
+    @Prop({ type: [String] })
+    images: string[];
+
+    @Prop({ type: [String] })
+    imageUrls: string[];
+
 }
 
 export const NewsSchema = SchemaFactory.createForClass(News);
+
+//! successStories
+/*
+
+controller, service, schema
+
+*/

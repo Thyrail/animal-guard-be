@@ -9,9 +9,10 @@ export class AdoptionService
 {
     constructor(@InjectModel(AdoptionPost.name) private model: Model<AdoptionPost>) { }
 
-    create(dto: CreateAdoptionDto)
+    async create(dto: CreateAdoptionDto)
     {
-        return new this.model(dto).save();
+        const newAdoptionPost = new this.model(dto);
+        return newAdoptionPost.save();
     }
 
     findAll()

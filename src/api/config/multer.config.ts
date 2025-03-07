@@ -1,15 +1,15 @@
-import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
-import * as multer from 'multer';
+import { diskStorage } from 'multer';
 import { extname } from 'path';
 
-export const multerConfig: MulterOptions = {
-    storage: multer.diskStorage({
-        destination: './uploads', //! Speichert Dateien im "uploads"-Ordner
-        filename: (req, file, cb) =>
+export const multerConfig = {
+    storage: diskStorage({
+        destination: './uploads', //? Upload-Ordner
+        filename: (req, file, callback) =>
         {
             const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-            cb(null, uniqueSuffix + extname(file.originalname));
+            callback(null, uniqueSuffix + extname(file.originalname));
         },
     }),
-    limits: { fileSize: 5 * 1024 * 1024 }, //! Maximal 5MB pro Datei
+    limits: { fileSize: 5 * 1024 * 1024 }, //! Max. 5 MB pro Datei
+    
 };

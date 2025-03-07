@@ -17,13 +17,6 @@ export class EventController
         return this.eventService.create(dto);
     }
 
-    @Post('upload')
-    @UseInterceptors(FileInterceptor('file', multerConfig))
-    uploadFile(@UploadedFile() file: Express.Multer.File)
-    {
-        return { imageUrl: `/uploads/${file.filename}` };
-    }
-
     @Get()
     findAll()
     {

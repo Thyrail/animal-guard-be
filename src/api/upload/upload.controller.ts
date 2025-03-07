@@ -1,18 +1,29 @@
-import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { Controller, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { ApiConsumes, ApiTags, ApiBody } from '@nestjs/swagger';
 import { multerConfig } from '../config/multer.config';
-import { UploadService } from './upload.service';
 
+@ApiTags('Upload')
 @Controller('upload')
 export class UploadController
 {
-    constructor(private readonly uploadService: UploadService) { }
-
     @Post()
-    @UseInterceptors(FileInterceptor('file', multerConfig))
-    uploadFile(@UploadedFile() file: Express.Multer.File)
+    @UseInterceptors(FilesInterceptor('imageUploads', 10, multerConfig)) // 🔹 Bis zu 10 Bilder
+    @ApiConsumes('multipart/form-data')
+    @ApiBody({
+        schema: {
+            type: 'object',
+            properties: {
+                imageUploads: {
+                    type: 'array',
+                    items: { type: 'string', format: 'binary' },
+                },
+            },
+        },
+    })
+    uploadImages(@UploadedFiles() files: Express.Multer.File[])
     {
-        return { imageUrl: this.uploadService.getFileUrl(file) };
+        return files.map((file) => `/uploads/${file.filename}`);
     }
 
 }

@@ -11,7 +11,7 @@ export class News extends Document
     description: string;
 
     @Prop({ type: [String] })
-    images: string[];
+    imageUploads: string[];
 
     @Prop({ type: [String] })
     imageUrls: string[];

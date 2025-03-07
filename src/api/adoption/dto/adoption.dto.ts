@@ -10,7 +10,7 @@ export class CreateAdoptionDto
     description: string;
 
     @ApiProperty({ example: ['https://example.com/dog2.jpg'], required: false, isArray: true })
-    images?: string[];
+    imageUploads?: string[];
 
     @ApiProperty({ example: ['https://example.com/dog2.jpg'], required: false, isArray: true })
     imageUrls?: string[];
@@ -57,7 +57,7 @@ export class UpdateAdoptionDto
     description?: string;
 
     @ApiProperty({ example: ['https://example.com/dog2.jpg'], required: false, isArray: true })
-    images?: string[];
+    imageUploads?: string[];
 
     @ApiProperty({ example: ['https://example.com/dog2.jpg'], required: false, isArray: true })
     imageUrls?: string[];

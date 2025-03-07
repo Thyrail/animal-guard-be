@@ -9,7 +9,7 @@ export class CreateNewsDto
     description: string;
 
     @ApiProperty({ example: 'https://example.com/news.jpg', description: 'Image URL for the news', required: false })
-    images: string[];
+    imageUploads?: string[];
 
     @ApiProperty({ example: 'https://example.com/news.jpg', description: 'Image URL for the news', required: false })
     imageUrls: string[];
@@ -25,7 +25,7 @@ export class UpdateNewsDto
     description?: string;
 
     @ApiProperty({ example: 'https://example.com/news.jpg', description: 'Image URL for the news', required: false })
-    images: string[];
+    imageUploads?: string[];
 
     @ApiProperty({ example: 'https://example.com/news.jpg', description: 'Image URL for the news', required: false })
     imageUrls: string[];

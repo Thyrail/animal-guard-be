@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { MissingService } from './missing.service';
 import { CreateMissingDto, UpdateMissingDto } from './dto/missing.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { multerConfig } from '../config/multer.config';
 
 @ApiTags('Missing')
 @Controller('missing')
@@ -13,6 +15,13 @@ export class MissingController
     create(@Body() dto: CreateMissingDto)
     {
         return this.missingService.create(dto);
+    }
+
+    @Post('upload')
+    @UseInterceptors(FileInterceptor('file', multerConfig))
+    uploadFile(@UploadedFile() file: Express.Multer.File)
+    {
+        return { imageUrl: `/uploads/${file.filename}` };
     }
 
     @Get()

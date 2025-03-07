@@ -7,6 +7,8 @@ import { MissingModule } from './api/missing/missing.module';
 import { NewsModule } from './api/news/news.module';
 import { UserModule } from './api/user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { StoryModule } from './api/story/story.module';
+import { UploadModule } from './api/upload/upload.module';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { AuthModule } from './auth/auth.module';
     MissingModule,
     NewsModule,
     UserModule,
+    StoryModule,
+    UploadModule,
     AuthModule,
   ],
 })

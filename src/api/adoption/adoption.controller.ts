@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { AdoptionService } from './adoption.service';
 import { CreateAdoptionDto, UpdateAdoptionDto } from './dto/adoption.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { RouterModule } from '@nestjs/core';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { multerConfig } from '../config/multer.config';
 
 @ApiTags('Adoption')
 @Controller('adoption')
@@ -14,6 +15,13 @@ export class AdoptionController
     create(@Body() dto: CreateAdoptionDto)
     {
         return this.service.create(dto);
+    }
+
+    @Post('upload')
+    @UseInterceptors(FileInterceptor('file', multerConfig))
+    uploadFile(@UploadedFile() file: Express.Multer.File)
+    {
+        return { imageUrl: `/uploads/${file.filename}` };
     }
 
     @Get()
@@ -39,5 +47,5 @@ export class AdoptionController
     {
         return this.service.remove(id);
     }
-    
+
 }

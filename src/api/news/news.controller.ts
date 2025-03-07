@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { NewsService } from './news.service';
 import { CreateNewsDto, UpdateNewsDto } from './dto/news.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { multerConfig } from '../config/multer.config';
 
 @ApiTags('News')
 @Controller('news')
@@ -13,6 +15,13 @@ export class NewsController
     create(@Body() dto: CreateNewsDto)
     {
         return this.newsService.create(dto);
+    }
+
+    @Post('upload')
+    @UseInterceptors(FileInterceptor('file', multerConfig))
+    uploadFile(@UploadedFile() file: Express.Multer.File)
+    {
+        return { imageUrl: `/uploads/${file.filename}` };
     }
 
     @Get()

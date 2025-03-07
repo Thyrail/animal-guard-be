@@ -1,20 +1,20 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, UploadedFile, UseInterceptors } from '@nestjs/common';
-import { EventService } from './event.service';
-import { CreateEventDto, UpdateEventDto } from './dto/event.dto';
+import { StoryService } from './story.service';
+import { CreateStoryDto, UpdateStoryDto } from './dto/story.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerConfig } from '../config/multer.config';
 
-@ApiTags('Events')
-@Controller('events')
-export class EventController
+@ApiTags('Stories')
+@Controller('stories')
+export class StoryController
 {
-    constructor(private readonly eventService: EventService) { }
+    constructor(private readonly service: StoryService) { }
 
     @Post()
-    create(@Body() dto: CreateEventDto)
+    create(@Body() dto: CreateStoryDto)
     {
-        return this.eventService.create(dto);
+        return this.service.create(dto);
     }
 
     @Post('upload')
@@ -27,25 +27,25 @@ export class EventController
     @Get()
     findAll()
     {
-        return this.eventService.findAll();
+        return this.service.findAll();
     }
 
     @Get(':id')
     findOne(@Param('id') id: string)
     {
-        return this.eventService.findOne(id);
+        return this.service.findOne(id);
     }
 
     @Put(':id')
-    update(@Param('id') id: string, @Body() dto: UpdateEventDto)
+    update(@Param('id') id: string, @Body() dto: UpdateStoryDto)
     {
-        return this.eventService.update(id, dto);
+        return this.service.update(id, dto);
     }
 
     @Delete(':id')
     remove(@Param('id') id: string)
     {
-        return this.eventService.remove(id);
+        return this.service.remove(id);
     }
 
 }

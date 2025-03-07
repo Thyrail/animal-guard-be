@@ -8,7 +8,7 @@ export class CreateMissingDto
     @ApiProperty({ example: 'A small brown dog was lost near the park.', required: true, description: 'Details about the missing case' })
     description: string;
 
-    @ApiProperty({ example: ['https://example.com/missing-dog.jpg'], required: false, description: 'Array of image URLs', isArray: true })
+    @ApiProperty({ example: ['bild1.jpg'], required: false, description: 'Local Images' })
     imageUploads?: string[];
 
     @ApiProperty({ example: ['https://example.com/missing-dog.jpg'], required: false, description: 'Array of image URLs', isArray: true })
@@ -33,7 +33,7 @@ export class UpdateMissingDto
     @ApiProperty({ example: 'Updated description', required: false })
     description?: string;
 
-    @ApiProperty({ example: ['https://example.com/missing-dog.jpg'], required: false, description: 'Array of image URLs', isArray: true })
+    @ApiProperty({ example: ['bild1.jpg'], required: false, description: 'Local Images' })
     imageUploads?: string[];
 
     @ApiProperty({ example: ['https://example.com/missing-dog.jpg'], required: false, description: 'Array of image URLs', isArray: true })

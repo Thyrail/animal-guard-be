@@ -9,9 +9,12 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
     environment:
       - TZ=${TZ}
+    volumes:
+      - uploads-data:/app/uploads
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.animal-guard.rule=Host(`${API_DOMAIN}`)"
@@ -33,6 +36,11 @@ services:
       - mongo-data:/data/db
     networks:
       - proxy
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
 
 networks:
   proxy:
@@ -40,3 +48,4 @@ networks:
 
 volumes:
   mongo-data:
+  uploads-data:

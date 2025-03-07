@@ -8,7 +8,7 @@ export class CreateEventDto
     @ApiProperty({ example: 'A 5km charity run for a cause', required: true, description: 'Event description' })
     description: string;
 
-    @ApiProperty({ example: 'https://example.com/event.jpg', required: false, description: 'Event image URL'})
+    @ApiProperty({ example: ['bild1.jpg'], required: false, description: 'Local Images' })
     imageUploads?: string[];
 
     @ApiProperty({ example: 'https://example.com/event.jpg', required: false, description: 'Event image URL' })
@@ -36,7 +36,7 @@ export class UpdateEventDto
     @ApiProperty({ example: 'Updated description', required: false })
     description?: string;
 
-    @ApiProperty({ example: 'https://example.com/event.jpg', required: false, description: 'Event image URL'})
+    @ApiProperty({ example: ['bild1.jpg'], required: false, description: 'Local Images' })
     imageUploads?: string[];
 
     @ApiProperty({ example: 'https://example.com/event.jpg', required: false, description: 'Event image URL' })

@@ -14,7 +14,7 @@ export class AdoptionPost extends Document
 
     //? Multer muss hinzugefügt werden um Images von lokal auf den Server hochzuladen
     @Prop({ type: [String]})
-    images: string[];
+    imageUploads: string[];
 
     @Prop({ type: [String]})
     imageUrls: string[];

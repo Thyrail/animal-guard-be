@@ -27,6 +27,7 @@
     "@nestjs/platform-express": "^10.4.15",
     "@nestjs/swagger": "^11.0.5",
     "bcryptjs": "^3.0.2",
+    "class-validator": "^0.14.1",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "moment-timezone": "^0.5.47",

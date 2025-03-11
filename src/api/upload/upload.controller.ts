@@ -23,6 +23,7 @@ export class UploadController
     })
     uploadImages(@UploadedFiles() files: Express.Multer.File[])
     {
+        console.log("📤 Received files:", files);
         return files.map((file) => `/uploads/${file.filename}`);
     }
 
